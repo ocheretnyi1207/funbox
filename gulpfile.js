@@ -3,14 +3,15 @@ const sass = require("gulp-sass");
 const plumber = require("gulp-plumber");
 const sourcemaps = require("gulp-sourcemaps");
 const server = require("browser-sync");
-const autoprefixer = require("gulp-autoprefixer");
+const postcss = require("gulp-postcss");
+const autoprefixer = require("autoprefixer");
 
 gulp.task("css", function () {
     return gulp.src("scss/style.scss")
       .pipe(plumber())
       .pipe(sourcemaps.init())
       .pipe(sass())
-      .pipe(autoprefixer())
+      .pipe(postcss([autoprefixer()]))
       .pipe(sourcemaps.write("."))
       .pipe(gulp.dest("css"))
       .pipe(server.stream())

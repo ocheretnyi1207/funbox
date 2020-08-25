@@ -2,31 +2,17 @@
 
 const items = document.querySelectorAll('.catfood-list__item');
 
-const onMouseUp = () => {
-    if (it.classList.contains('fuagra')) {
-        const excerpt = it.querySelector('.catfood-list__excerpt');
-        excerpt.style.left = '50px';
-        excerpt.innerHTML = 'Чего сидишь? Порадуй котэ, <a href="#">купи.</a>'
-    } else if (it.classList.contains('fish')) {
-        const excerpt = it.querySelector('.catfood-list__excerpt');
-        excerpt.style.left = '50px';
-        excerpt.innerHTML = 'Чего сидишь? Порадуй котэ, <a href="#">купи.</a>'
-    } else if (it.classList.contains('chicken')) {
-        const excerpt = it.querySelector('.catfood-list__excerpt');
-        excerpt.style.left = '50px';
-        excerpt.innerHTML = 'Чего сидишь? Порадуй котэ, <a href="#">купи.</a>'
-    }
-};
-
 for (let it of items) {
     it.addEventListener('mousedown', (evt) => {
 
         evt.preventDefault();
 
         const onMouseUp = () => {
-            const excerpt = it.querySelector('.catfood-list__excerpt');
-            excerpt.style.left = '50px';
-            excerpt.innerHTML = 'Чего сидишь? Порадуй котэ, <a href="#">купи.</a>'
+            if (it.classList.contains('fuagra') || it.classList.contains('fish') || it.classList.contains('chicken')) {
+                const excerpt = it.querySelector('.catfood-list__excerpt');
+                excerpt.style.left = '50px';
+                excerpt.innerHTML = 'Чего сидишь? Порадуй котэ, <a href="#">купи.</a>';
+            }
         };
 
         if (it.dataset.disabled === 'true') {

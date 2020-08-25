@@ -20,10 +20,21 @@ ul {
 }
 
 .container {
-  @media (max-width: 768px) {
+  @media (max-width: 1279px) {
     width: 100%;
-    background: #313131;
-    padding-bottom: 47px;
+  }
+
+  @media (max-width: 1119px) {
+    background-image: none;
+    background-color: #313131;
+  }
+
+  @media (max-width: 799px) {
+    padding-bottom: 0;
+  }
+
+  @media (max-width: 759px) {
+    padding-bottom: 0;
   }
 
   width: 1280px;
@@ -35,10 +46,6 @@ ul {
 }
 
 .page-main__head {
-  @media(max-width: 375px) {
-    font-size: 27px;
-  }
-
   margin-bottom: 23px;
   text-align: center;
   color: #ffffff;
@@ -48,8 +55,12 @@ ul {
 }
 
 .catfood-list {
-  @media (max-width: 768px) {
+  @media (max-width: 1279px) {
     width: 100%;
+  }
+
+  @media (max-width: 759px) {
+    width: 320px;
   }
 
   display: flex;
@@ -60,14 +71,63 @@ ul {
   width: 1120px;
 
   &__item {
-    @media (max-width: 375px) {
-      margin-bottom: 50px;
+    @media (max-width: 1119px) {
+      margin-bottom: 80px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 799px) {
       margin-bottom: 80px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-left: 40px;
+    }
+
+    &:first-child {
+      @media (max-width: 1279px) {
+        margin-left: 80px;
+      }
+
+      @media (max-width: 799px) {
+        margin-left: 40px;
+      }
+
+      @media (max-width: 759px) {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    &:nth-child(3n+2) {
+      @media (max-width: 1119px) {
+        margin-right: 80px;
+      }
+
+      @media (max-width: 799px) {
+        margin-right: 40px;
+      }
+
+      @media (max-width: 759px) {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    &:last-child {
+      @media (max-width: 1279px) {
+        margin-right: 80px;
+      }
+
+      @media (max-width: 1119px) {
+        margin-left: 80px;
+        margin-right: 0;
+      }
+
+      @media (max-width: 799px) {
+        margin-left: 40px;
+      }
+
+      @media (max-width: 759px) {
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
 
     position: relative;

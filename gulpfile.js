@@ -5,21 +5,26 @@ const sourcemaps = require("gulp-sourcemaps");
 const server = require("browser-sync");
 const postcss = require("gulp-postcss");
 const autoprefixer = require("autoprefixer");
+const csso = require("gulp-csso");
+const rename = require("gulp-rename");
+const htmlmin= require("gulp-htmlmin");
 
 gulp.task("css", function () {
-    return gulp.src("scss/style.scss")
+    return gulp.src("src/scss/style.scss")
       .pipe(plumber())
       .pipe(sourcemaps.init())
       .pipe(sass())
       .pipe(postcss([autoprefixer()]))
+      .pipe(csso())
+      .pipe(rename("style.min.css"))
       .pipe(sourcemaps.write("."))
-      .pipe(gulp.dest("css"))
+      .pipe(gulp.dest("build/css"))
       .pipe(server.stream())
   });
 
   gulp.task("server", function () {
     server.init({
-      server: "",
+      server: "build/",
       notify: false,
       open: true,
       cors: true,
@@ -32,9 +37,27 @@ gulp.task("css", function () {
     done();
   });
 
-gulp.watch("scss/**/*.scss", gulp.series("css"));
-gulp.watch("*.html", gulp.series("refresh"));
-gulp.watch("*.html").on("change", server.reload);
+  gulp.task("html-minify", function () {
+    return gulp.src("build/*.html")
+      .pipe(htmlmin({ collapseWhitespace: true }))
+      .pipe(gulp.dest("build"))
+  });
 
+  gulp.task("copy", function () {
+    return gulp.src([
+      "src/fonts/**/*.{woff2,woff}",
+      "src/*.html",
+      "src/img/**",
+      "src/js/**",
+    ], {
+      base: "src"
+    })
+    .pipe(gulp.dest("build"))
+  });
 
-gulp.task("start", gulp.series("css", "server"));
+gulp.watch("src/scss/**/*.scss", gulp.series("css"));
+gulp.watch("src/*.html", gulp.series("refresh"));
+gulp.watch("src/*.html").on("change", server.reload);
+
+gulp.task("build", gulp.series("css", "copy", "html-minify"));
+gulp.task("start", gulp.series("build", "server"));

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "gulp build",
     "start": "gulp start"
   },
   "browserslist": [
@@ -15,6 +16,8 @@
     "autoprefixer": "^9.8.6",
     "browser-sync": "^2.26.12",
     "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^2.0.0",

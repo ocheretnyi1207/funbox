@@ -9,5 +9,5 @@
 #### Run project on local server
 - Run a project with the command `npm start`
 
-#### Feautures of work project
+#### Features of work project
 - Disabled effect, added using data-attribute `data-disabled="true"`

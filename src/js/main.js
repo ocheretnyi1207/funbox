@@ -1,60 +1,94 @@
-'use strict';
+import {nameProducts} from "/src/js/data"
 
-const items = document.querySelectorAll('.catfood-list__item');
+const catFoodList = document.querySelector(".catfood-list");
 
-for (let it of items) {
-    it.addEventListener('mousedown', (evt) => {
+const createCatFoodItemMarkup = (productsList) => {
 
-        evt.preventDefault();
+  const createCatFoodItemTemplate = productsList.map((it) => {
+    return (
+      `<li class="catfood-list__item ${it.id}" data-disabled=${it.disabled}>
+         <p class="catfood-list__item-title">${it.name}</p>
+         <h2 class="catfood-list__item-heading">${it.title}</h2>
+         <p class="catfood-list__item-description">${it.description}</p>
+         <ul class="features-list">
+           <li class="features-list__item"><b>${it.number}</b> ${it.unit}</li>
+           <li class="features-list__item">${it.bonus_number} ${it.bonus_description}</li>
+         </ul>
+         <div class="catfood-list__innerwrapper">
+           <p>${it.weight}</p>
+           <p>${it.weight_unit}</p>
+         </div>
+         <p class="catfood-list__item-slogan">Чего сидишь? Порадуй котэ,<a href="#">купи</a></p>
+       </li>`
+      )
+  }).join(`\n`);
 
-        const onMouseUp = () => {
-            if (it.classList.contains('fuagra') || it.classList.contains('fish') || it.classList.contains('chicken')) {
-                const excerpt = it.querySelector('.catfood-list__excerpt');
-                excerpt.style.left = '50px';
-                excerpt.innerHTML = 'Чего сидишь? Порадуй котэ, <a href="#">купи.</a>';
-            }
-        };
+  return createCatFoodItemTemplate;
+};
 
-        if (it.dataset.disabled === 'true') {
-            it.style.backgroundImage = 'url("/img/bg-disabled.png")';
-            it.style.backgroundRepeat = 'no-repeat';
-            it.querySelector('.catfood-list__title').style.color = 'rgba(179, 179, 179, 0.5)';
-            it.querySelector('.catfood-list__heading').style.color = 'rgba(179, 179, 179, 0.5)';
-            it.querySelector('.catfood-list__description').style.color = 'rgba(179, 179, 179, 0.5)';
-            it.querySelector('.features-list').style.color = 'rgba(179, 179, 179, 0.5)';
-            it.querySelector('.catfood-list__innerwrapper').style.backgroundColor = '#b3b3b3';
-            it.querySelector('.catfood-list__excerpt').style.color = '#ffff66';
+catFoodList.insertAdjacentHTML('afterbegin', createCatFoodItemMarkup(nameProducts));
 
-            if (it.classList.contains('chicken')) {
-                it.querySelector('.catfood-list__excerpt').textContent = 'Печалька, с курой закончился';
-            } else if (it.classList.contains('fish')) {
-                it.querySelector('.catfood-list__excerpt').textContent = 'Печалька, с рыбой закончился';
-            } else if (it.classList.contains('fuagra')) {
-                it.querySelector('.catfood-list__excerpt').textContent = 'Печалька, с фуа-гра закончился';
-            }
-        }
+catFoodList.addEventListener("mousedown", (evt) => {
+  evt.preventDefault();
 
-        if (it.classList.contains('chicken') && it.dataset.disabled !== 'true') {
-            const excerpt = it.querySelector('.catfood-list__excerpt');
-            excerpt.style.left = '40px'
-            excerpt.textContent = 'Филе из цыплят с трюфелями в бульоне';
+  const target = evt.target.closest(".catfood-list__item");
 
-            it.addEventListener('mouseup', onMouseUp);
-        } else if (it.classList.contains('fish') && it.dataset.disabled !== 'true') {
-            const excerpt = it.querySelector('.catfood-list__excerpt');
-            excerpt.style.width = '320px'
-            excerpt.style.left = '5px'
-            excerpt.textContent = 'Головы щучьи с чесноком да свежайшая семгушка';
+  const onMouseUp = () => {
+    if (target.classList.contains('fuagra') || target.classList.contains('fish') || target.classList.contains('chicken')) {
+        const slogan = target.querySelector('.catfood-list__item-slogan');
+        slogan.style.left = '50px';
+        slogan.innerHTML = 'Чего сидишь? Порадуй котэ, <a href="#">купи.</a>';
+    }
 
-            it.addEventListener('mouseup', onMouseUp);
-        } else if (it.classList.contains('fuagra') && it.dataset.disabled !== 'true') {
-            const excerpt = it.querySelector('.catfood-list__excerpt');
-            excerpt.style.width = '234px';
-            excerpt.textContent = 'Печень утки разварная с артишоками';
+    target.removeEventListener("mouseup", onMouseUp);
+  };
 
-            it.addEventListener('mouseup', onMouseUp);
-        }
+  if (target.classList.contains("chicken") && target.dataset.disabled !== "true") {
+   const slogan = target.querySelector(".catfood-list__item-slogan");
+   slogan.style.left = "40px";
+   slogan.textContent = "Филе из цыплят с трюфелями в бульоне";
 
+   target.addEventListener("mouseup", onMouseUp);
+  };
 
-    })
-}
+  if (target.classList.contains("fish") && target.dataset.disabled !== "true") {
+    const slogan = target.querySelector(".catfood-list__item-slogan");
+    slogan.style.width = "320px";
+    slogan.style.left = "5px";
+    slogan.textContent = "Головы щучьи с чесноком да свежайшая семгушка";
+
+    target.addEventListener("mouseup", onMouseUp);
+  };
+
+  if (target.classList.contains("fuagra") && target.dataset.disabled !== "true") {
+    const slogan = target.querySelector(".catfood-list__item-slogan");
+    slogan.style.width = "234px";
+    slogan.textContent = "Печень утки разварная с артишоками";
+
+    target.addEventListener("mouseup", onMouseUp);
+  };
+
+  if (target.dataset.disabled === 'true') {
+    target.style.backgroundImage = 'url("/img/bg-disabled.png")';
+    target.style.backgroundRepeat = 'no-repeat';
+    target.querySelector('.catfood-list__item-title').style.color = 'rgba(179, 179, 179, 0.5)';
+    target.querySelector('.catfood-list__item-heading').style.color = 'rgba(179, 179, 179, 0.5)';
+    target.querySelector('.catfood-list__item-description').style.color = 'rgba(179, 179, 179, 0.5)';
+    target.querySelector('.features-list').style.color = 'rgba(179, 179, 179, 0.5)';
+    target.querySelector('.catfood-list__innerwrapper').style.backgroundColor = '#b3b3b3';
+    target.querySelector('.catfood-list__item-slogan').style.color = '#ffff66';
+
+    const idToText = new Map([
+      ["chicken", "Печалька, с курой закончился"],
+      ["fish", "Печалька, с рыбой закончился"],
+      ["fuagra", "Печалька, с фуа-гра закончился"],
+    ]);
+
+    for (let [key, value] of idToText) {
+      if (target.classList.contains(key)) {
+        target.querySelector('.catfood-list__item-slogan').textContent = value;
+      }
+    }
+
+  }
+});

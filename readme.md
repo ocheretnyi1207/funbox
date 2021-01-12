@@ -1,19 +1,13 @@
-# Тестовое задание от FunBox
+# Test task from FunBox
 
-#### Стек технологий, используемых в проекте
+#### How to build a project
+- Download project archive
+- Go to the project folder
+- Install dependencies with the command `npm install`
+- Build a project with the command `npm run build`
 
-- Разметка страницы - HTML 5
-- CSS написан при помощи препроцессора SCSS
-- Сборка проекта - Gulp
+#### Run project on local server
+- Run a project with the command `npm start`
 
-#### Как собрать проект
-
-- Скачиваем архив проекта
-- Переходим в папку на локальном ПК
-- Устанавливаем зависимости проекта, командой `npm install`
-- Для запуска проекта необходимо выполнить `npm start`
-- Готовая сборка будет находится в папке  `build`
-
-#### Особенности работы проекта
-
-- Disabled эффект, добавляется к соответствующей карточке в HTML разметке, при помощи data-атрибута `data-disabled="true"`
+#### Feautures of work project
+- Disabled effect, added using data-attribute `data-disabled="true"`

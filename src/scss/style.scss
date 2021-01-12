@@ -1,10 +1,15 @@
 @import './fonts.scss';
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Trebuchet MS", "Arial", sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 h1,
@@ -38,7 +43,7 @@ ul {
   background: url("/img/bg-main.png") no-repeat;
 }
 
-.page-main__head {
+.page-main__title {
   margin-bottom: 23px;
   text-align: center;
   color: #ffffff;
@@ -57,7 +62,8 @@ ul {
   }
 
   display: flex;
-  flex-wrap: wrap;;
+  flex-wrap: wrap;
+  ;
   justify-content: space-between;
   margin-left: auto;
   margin-right: auto;
@@ -140,23 +146,37 @@ ul {
     &:active>.catfood-list__innerwrapper {
       background-color: #d91667;
     }
-  }
 
-  &__title {
-    margin-bottom: 15px;
-    font-size: 16px;
-    color: #666666;
-  }
+    &-title {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #666666;
+    }
 
-  &__heading {
-    font-size: 48px;
-    font-weight: 700;
-  }
+    &-heading {
+      font-size: 48px;
+      font-weight: 700;
+    }
 
-  &__description {
-    margin-bottom: 16px;
-    font-size: 24px;
-    font-weight: 700;
+    &-description {
+      margin-bottom: 16px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    &-slogan {
+      position: absolute;
+      top: 495px;
+      left: 50px;
+      font-size: 13px;
+      line-height: 16px;
+      color: #ffffff;
+
+      a {
+        color: #1698d9;
+      }
+    }
+
   }
 
   &__innerwrapper {
@@ -183,19 +203,6 @@ ul {
     }
   }
 
-  &__excerpt {
-
-    position: absolute;
-    top: 495px;
-    left: 50px;
-    font-size: 13px;
-    line-height: 16px;
-    color: #ffffff;
-
-    a {
-      color: #1698d9;
-    }
-  }
 }
 
 .features-list {
